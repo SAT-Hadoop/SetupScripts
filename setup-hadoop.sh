@@ -80,4 +80,4 @@ echo "`/sbin/ifconfig | grep 'inet addr:' | head -1 | awk '{print $2}'|awk -F":"
 echo "master" > $HOME//hadoop-2.6.0/etc/hadoop/slaves
 $HOME/hadoop-2.6.0/sbin/stop-all.sh
 $HOME/hadoop-2.6.0/bin/hadoop namenode -format
-$HOME/hadoop-2.6.0/sbin/start-all.sh
+#$HOME/hadoop-2.6.0/sbin/start-all.sh
