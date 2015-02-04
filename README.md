@@ -16,4 +16,6 @@ have the pem file, setup-hadoop.sh,syncslaves.sh in the same directory
 <ol>
 Run the syncslaves.sh and you are good to go
 </ol>
-
+<ol>
+On the master, do a start-all.sh
+</ol>
