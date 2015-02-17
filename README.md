@@ -1,3 +1,15 @@
+Instructions to setup the Scheduler</h1>
+<ol>
+import your AWS credentials to AWS_ACCESS_KEY and AWS_SECRET_KEY using the export command
+<ol>
+<ol>
+Clone the scheduler-setup.sh and run it
+</ol>
+Open <ipaddress>/app/index in the browser to get started
+</ol>
+
+
+
 <h1> Instructions to using these scripts to setup a hadoop cluster </h1>
 <h4> You will need a ubuntu system to be able to run the scripts </h4>
 <hr>
@@ -19,3 +31,4 @@ Run the syncslaves.sh and you are good to go
 <ol>
 On the master, do a start-all.sh
 </ol>
+~                 
