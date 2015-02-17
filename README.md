@@ -1,4 +1,4 @@
-Instructions to setup the Scheduler</h1>
+<h1>Instructions to setup the Scheduler</h1>
 <ol>
 import your AWS credentials to AWS_ACCESS_KEY and AWS_SECRET_KEY using the export command
 <ol>
