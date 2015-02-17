@@ -1,11 +1,11 @@
 <h1>Instructions to setup the Scheduler</h1>
 <ol>
-import your AWS credentials to AWS_ACCESS_KEY and AWS_SECRET_KEY using the export command
+import your AWS credentials to AWSACCESSKEY and AWSSECRETKEY using the export command
 <ol>
 <ol>
 Clone the scheduler-setup.sh and run it
 </ol>
-Open <ipaddress>/app/index in the browser to get started
+Open http://ipaddress/app/index in the browser to get started
 </ol>
 
 
