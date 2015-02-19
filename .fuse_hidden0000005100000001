@@ -57,7 +57,7 @@ echo "
 
 echo "
 export JAVA_HOME=/usr
-export PATH=$PATH:$HOME/hadoop-2.6.0/bin:$HOME/hadoop-2.6.0/sbin:/usr
+export PATH=$PATH:$HOME/hadoop-2.6.0/bin:$HOME//hadoop-2.6.0/sbin:/usr
 " >> ~/.bashrc
 
 cat $HOME/hadoop-2.6.0/etc/hadoop/hadoop-env.sh | sed 's/export JAVA_HOME/#/' > tmp
@@ -79,5 +79,5 @@ sudo chmod 777 /etc/hosts
 echo "`/sbin/ifconfig | grep 'inet addr:' | head -1 | awk '{print $2}'|awk -F":" '{print $2}'` master" >> /etc/hosts
 echo "master" > $HOME//hadoop-2.6.0/etc/hadoop/slaves
 $HOME/hadoop-2.6.0/sbin/stop-all.sh
-$HOME/hadoop-2.6.0/bin/hadoop namenode -format -force
+$HOME/hadoop-2.6.0/bin/hadoop namenode -format
 #$HOME/hadoop-2.6.0/sbin/start-all.sh
