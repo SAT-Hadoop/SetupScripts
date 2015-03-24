@@ -7,7 +7,8 @@ sudo apt-get -y install python-software-properties
 sudo apt-get -y install curl
 sudo apt-get -y install git
 sudo apt-get -y install unzip maven
-
+sudo apt-get -y install python-pip
+pip install awscli
 cd /tmp
 wget download.java.net/glassfish/4.0/release/glassfish-4.0.zip
 sudo unzip glassfish-4.0.zip -d /opt
@@ -19,9 +20,6 @@ sudo rm -r sat-hadoop-api
 sudo rm -r HadoopAutomation
 git clone https://github.com/saipramod/HadoopAutomation.git
 git clone https://github.com/saipramod/sat-hadoop-api.git
-sudo apt-get install -y python-setuptools
-git clone https://github.com/s3tools/s3cmd.git
-python s3cmd/setup.py install
 cd sat-hadoop-api/
 mvn clean install
 cd ..

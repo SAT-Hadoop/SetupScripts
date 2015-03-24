@@ -55,6 +55,36 @@ echo "
 </configuration>
 " > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
+echo"
+<?xml version="1.0"?>
+<configuration>
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>namenode:8031</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>namenode:8032</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>namenode:8030</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.admin.address</name>
+    <value>namenode:8033</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.webapp.address</name>
+    <value>namenode:8088</value>
+  </property>
+</configuration>
+
+"> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
+
+
+
+
 echo "
 export JAVA_HOME=/usr
 export PATH=$PATH:$HOME/hadoop-2.6.0/bin:$HOME/hadoop-2.6.0/sbin:/usr
