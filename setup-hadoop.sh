@@ -56,7 +56,6 @@ echo "
 " > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
 echo"
-<?xml version="1.0"?>
 <configuration>
   <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
