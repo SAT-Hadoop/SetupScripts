@@ -38,6 +38,21 @@ echo "
   The default is used if replication is not specified in create time.
   </description>
 </property>
+<property>       
+ <name>dfs.name.dir</name>       
+ <value>/vol-01/hadoop/hdfs/nn</value>  
+ <description>Comma separated list of paths. Use the list of directories from $DFS_NAME_DIR.  
+                For example, /grid/hadoop/hdfs/nn,/grid1/hadoop/hdfs/nn.</description>
+</property>
+<property>       
+ <name>dfs.data.dir</name>       
+ <value>/vol-01/hadoop/hdfs/dn</value>  
+ <description>Comma separated list of paths. Use the list of directories from $DFS_NAME_DIR.  
+                For example, /grid/hadoop/hdfs/nn,/grid1/hadoop/hdfs/nn.</description>
+</property>
+
+
+
 </configuration>
 " > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
