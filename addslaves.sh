@@ -18,6 +18,7 @@ do
 echo "I am currently working on " $i
 /root/BackendWorker/syncmaster $i `/sbin/ifconfig | grep 'inet addr:' | head -1 | awk '{print $2}'|awk -F":" '{print $2}'`
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/hadoop-env.sh root@$i:/root/hadoop-2.6.0/etc/hadoop/
+/usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/yarn-env.sh root@$i:/root/hadoop-2.6.0/etc/hadoop/
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/hadoop-metrics2.properties root@$i:/root/hadoop-2.6.0/etc/hadoop/
 done
 
