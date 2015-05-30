@@ -9,8 +9,8 @@ Build Scripts for Packer Eucalyptus images and SAT-Hadoop project - task schedul
   * All package dependencies and pre-reqs (in preseed.cfg) `build-essential ssh curl rsync git unzip wget vim python-software-properties software-properties-common python-pip` 
   * awscli via python-pip
   * Install Ganglia and configure it as a client system
-  * [Install Hadoop Automation application](https://github.com/saipramod/HadoopAutomation.git) 
-  * [Install sat-hadoop-api](https://github.com/saipramod/sat-hadoop-api.git) 
+  * [Installs Hadoop Automation application](https://github.com/saipramod/HadoopAutomation.git) 
+  * [Installs sat-hadoop-api](https://github.com/saipramod/sat-hadoop-api.git) 
 
 ### Usage Instructions
 - Download [packer] (https://dl.bintray.com/mitchellh/packer/packer_0.7.5_linux_amd64.zip) 

@@ -10,22 +10,21 @@ sudo apt-get install -y rsyslog
 # Install aws-cli
 sudo pip install awscli
 
-# Install Ganglia
-sudo apt-get install -y ganglia-monitor rrdtool gmetad ganglia-webfrontend
+# Install Ganglia as a client to the central server
+sudo apt-get install -y ganglia-monitor 
 
-sudo cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
-
-sed -i 's/\"hadoop-cluster\" localhost 192.168.98.218' /etc/ganglia/gmetad.conf
-
+# the host value is the private IP of the central ganlia server IP
 sed -i 's/mcast_join = 239.2.11.71/i \ host = 192.168.98.218' /etc/ganglia/gmond.conf
+sed -i 's/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
 sed -i 's/mcast_join = 239.2.11.71/#mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
 sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
 sudo /etc/init.d/ganglia-monitor start
-sudo /etc/init.d/gmetad start
-sudo /etc/init.d/apache2 restart
 
 # Install rsyslog
+# Again assuming that the IP here is the private cloud IP of the Central Rsyslog server
+sudo echo "*.*   @192.168.98.218:514" >> /etc/rsyslog.conf
+
 
 # Install Task Scheduler Application
 wget --directory-prefix=/tmp download.java.net/glassfish/4.0/release/glassfish-4.0.zip
