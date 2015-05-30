@@ -14,10 +14,10 @@ sudo pip install awscli
 sudo apt-get install -y ganglia-monitor 
 
 # the host value is the private IP of the central ganlia server IP
-sed -i 's/mcast_join = 239.2.11.71/i \ host = 192.168.98.218' /etc/ganglia/gmond.conf
-sed -i 's/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
-sed -i 's/mcast_join = 239.2.11.71/#mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
-sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
+sudo sed -i '/mcast_join = 239.2.11.71/i \ host = 192.168.98.218' /etc/ganglia/gmond.conf
+sudo sed -i '/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
+sudo sed -i '/mcast_join = 239.2.11.71/#mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
+sudo sed -i '/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
 sudo /etc/init.d/ganglia-monitor start
 
