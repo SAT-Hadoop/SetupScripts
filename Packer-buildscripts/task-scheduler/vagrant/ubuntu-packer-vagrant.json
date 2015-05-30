@@ -36,6 +36,11 @@
   "provisioners": [
   {
     "type": "shell",
-    "script": "post_install.sh"
+    "script": "post_install_vagrant.sh"
+  }],
+  "post-processors": [
+  {
+  "type": "vagrant" 
   }]
+
 }
