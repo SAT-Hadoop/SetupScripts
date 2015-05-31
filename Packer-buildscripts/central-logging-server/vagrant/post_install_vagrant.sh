@@ -2,19 +2,22 @@
 set -e
 set -v
 
+# Vaiable for the mariadb debconf password preset
+MARIADBPASSWORD=letmein
+
 echo password | sudo -S add-apt-repository -y ppa:adiscon/v8-stable
 echo password | sudo -S  apt-get update 
 
 # Install Ganglia
-export DEBIAN_FRONTEND=noninteractive
-sudo apt-get install -y ganglia-monitor rrdtool gmetad ganglia-webfrontend
+# How to overcome the auto-reboot prompt from Ganglia http://askubuntu.com/questions/146921/how-do-i-apt-get-y-dist-upgrade-without-a-grub-config-prompt
+sudo DEBIAN_FRONTEND=noninteractive  apt-get install -y  -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" ganglia-monitor rrdtool gmetad ganglia-webfrontend
 
 sudo cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
 
-sudo sed -i 's/\"hadoop-cluster\" localhost 192.168.98.218' /etc/ganglia/gmetad.conf
+#sudo sed -i 's/\"hadoop-cluster\" localhost 192.168.98.218' /etc/ganglia/gmetad.conf
 sudo sed -i '/mcast_join = 239.2.11.71/i \ host = 192.168.98.218' /etc/ganglia/gmond.conf
 sudo sed -i 's/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
-sudo sed -i 's/mcast_join = 239.2.11.71/ #mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
+sudo sed -i 's/mcast_join = 239.2.11.71/#mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
 sudo sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
 sudo sed -i 's/port = 8649/#port = 8649/g' /etc/ganglia/gmond.conf
@@ -26,8 +29,8 @@ sudo service gmetad restart
 sudo service apache2 restart
 
 # Configure and Install rsyslog
-sudo echo mariadb-server-5.5 mariadb-server/root_password password string letmein |sudo  debconf-set-selections
-sudo echo mariadb-server-5.5 mariadb-server/root_password_again password string letmein | sudo debconf-set-selection
+sudo echo "mariadb-server-5.5 mariadb-server/root_password password string $MARIADBPASSWORD" |sudo  debconf-set-selections
+sudo echo "mariadb-server-5.5 mariadb-server/root_password_again password string $MARIADBPASSWORD" | sudo debconf-set-selections
 sudo apt-get install -y rsyslog mariadb-server
 
 sudo sed -i 's/#$ModLoad imudp/$ModLoad imudp/g' /etc/rsyslog.conf
