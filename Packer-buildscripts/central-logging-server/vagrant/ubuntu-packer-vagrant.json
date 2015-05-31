@@ -37,5 +37,9 @@
   {
     "type": "shell",
     "script": "post_install.sh"
+  }],
+  "post-processors": [
+  {
+    "type": "vagrant"
   }]
 }
