@@ -23,7 +23,7 @@ sudo sed -i 's/port = 8649/#port = 8649/g' /etc/ganglia/gmond.conf
 
 sudo sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
-sudo service ganglia-monitor start
+sudo service ganglia-monitor restart
 
 # Install rsyslog
 # Again assuming that the IP here is the private cloud IP of the Central Rsyslog server
