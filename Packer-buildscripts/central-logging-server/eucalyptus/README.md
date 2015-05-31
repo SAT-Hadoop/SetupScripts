@@ -14,7 +14,7 @@ Build Scripts for Packer Eucalyptus images and SAT-Hadoop project - central logg
 - run packer validte ubuntu-packer.json   
 - run packer build ubuntu-packer.json
 
-the post_install.sh file is where all the customization takes place
+The post_install_eucalyptus.sh file is where all the customization takes place
 
 note that this config will strip all login access - its only to be prepared for Eucalyptus
 
