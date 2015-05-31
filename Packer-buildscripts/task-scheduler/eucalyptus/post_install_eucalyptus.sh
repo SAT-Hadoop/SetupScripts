@@ -31,7 +31,7 @@ sudo sed -i "$ a *.* @192.168.98.218:514" /etc/rsyslog.conf
 
 # Install Task Scheduler Application
 wget --directory-prefix=/tmp download.java.net/glassfish/4.0/release/glassfish-4.0.zip
-unzip /tmp/glassfish-4.0.zip -d /opt
+sudo unzip /tmp/glassfish-4.0.zip -d /opt
 sudo chmod 777 -R /opt/*
 cat /opt/glassfish4/glassfish/domains/domain1/config/domain.xml | sed 's/"8080"/"80"/' > temp
 sudo cp temp /opt/glassfish4/glassfish/domains/domain1/config/domain.xml
