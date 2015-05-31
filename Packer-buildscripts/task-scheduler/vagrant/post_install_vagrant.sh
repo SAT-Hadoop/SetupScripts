@@ -15,20 +15,24 @@ sudo apt-get install -y ganglia-monitor
 
 # the host value is the private IP of the central ganlia server IP
 sudo sed -i '/mcast_join = 239.2.11.71/i \ host = 192.168.98.218' /etc/ganglia/gmond.conf
-sudo sed -i '/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
+sudo sed -i 's/name = "unspecified"/#name = "hadoop-cluster"/g' /etc/ganglia/gmond.conf
 sudo sed -i 's/mcast_join = 239.2.11.71/ #mcast_join = 239.2.11.71/g' /etc/ganglia/gmond.conf
 sudo sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
-sudo /etc/init.d/ganglia-monitor start
+sudo sed -i 's/port = 8649/#port = 8649/g' /etc/ganglia/gmond.conf
+
+sudo sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
+
+sudo service ganglia-monitor restart
 
 # Install rsyslog
 # Again assuming that the IP here is the private cloud IP of the Central Rsyslog server
-sudo echo "*.*   @192.168.98.218:514" >> /etc/rsyslog.conf
-
+#sudo echo "*.*   @192.168.98.218:514" >> /etc/rsyslog.conf
+sudo sed -i "$ a *.* @192.168.98.218:514" /etc/rsyslog.conf
 
 # Install Task Scheduler Application
 wget --directory-prefix=/tmp download.java.net/glassfish/4.0/release/glassfish-4.0.zip
-unzip /tmp/glassfish-4.0.zip -d /opt
+sudo unzip /tmp/glassfish-4.0.zip -d /opt
 sudo chmod 777 -R /opt/*
 cat /opt/glassfish4/glassfish/domains/domain1/config/domain.xml | sed 's/"8080"/"80"/' > temp
 sudo cp temp /opt/glassfish4/glassfish/domains/domain1/config/domain.xml
@@ -50,11 +54,10 @@ sudo rm -r HadoopAutomation
 git clone https://github.com/saipramod/HadoopAutomation.git /tmp/HadoopAutomation
 git clone https://github.com/saipramod/sat-hadoop-api.git /tmp/sat-hadoop-api
 cd /tmp/sat-hadoop-api/
-mvn clean install
+sudo mvn clean install
 cd /tmp/HadoopAutomation/
-mvn clean install
+sudo mvn clean install
 sudo /opt/glassfish4/bin/asadmin deploy --force=true target/*.war
-
 
 # ending configuration and poweroff
 #echo password | sudo -S curl -o /etc/rc.local https://raw.githubusercontent.com/viglesiasce/cloud-images/master/utils/rc.local

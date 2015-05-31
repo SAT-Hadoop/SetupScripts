@@ -6,7 +6,7 @@ Build Scripts for Packer Eucalyptus images and SAT-Hadoop project - task schedul
 - the hardrive size can be edited in ubuntu-packer.json
 - post_install.sh installs...
   * Installs rsyslog (8.9.0) configures it as a client that send its logs to a remote central rsyslog server
-  * All package dependencies and pre-reqs (in preseed.cfg) `build-essential ssh curl rsync git unzip wget vim python-software-properties software-properties-common python-pip` 
+  * All package dependencies and pre-reqs (in preseed.cfg) `build-essential ssh curl rsync git unzip wget vim python-software-properties software-properties-common python-pip sysstat openjdk-7-jdk` 
   * awscli via python-pip
   * Install Ganglia and configure it as a client system
   * [Installs Hadoop Automation application](https://github.com/saipramod/HadoopAutomation.git) 
