@@ -23,12 +23,11 @@ sudo sed -i 's/port = 8649/#port = 8649/g' /etc/ganglia/gmond.conf
 
 sudo sed -i 's/bind = 239.2.11.71/#bind = 239.2.11.71/g' /etc/ganglia/gmond.conf
 
-sudo /etc/init.d/ganglia-monitor start
+sudo service ganglia-monitor start
 
 # Install rsyslog
 # Again assuming that the IP here is the private cloud IP of the Central Rsyslog server
-sudo echo "*.*   @192.168.98.218:514" >> /etc/rsyslog.conf
-
+sudo sed -i "$ a *.* @192.168.98.218:514" /etc/rsyslog.conf 
 
 # Install Task Scheduler Application
 wget --directory-prefix=/tmp download.java.net/glassfish/4.0/release/glassfish-4.0.zip
