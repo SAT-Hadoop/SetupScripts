@@ -53,9 +53,9 @@ sudo rm -r HadoopAutomation
 git clone https://github.com/saipramod/HadoopAutomation.git /tmp/HadoopAutomation
 git clone https://github.com/saipramod/sat-hadoop-api.git /tmp/sat-hadoop-api
 cd /tmp/sat-hadoop-api/
-mvn clean install
+sudo mvn clean install
 cd /tmp/HadoopAutomation/
-mvn clean install
+sudo mvn clean install
 sudo /opt/glassfish4/bin/asadmin deploy --force=true target/*.war
 
 
