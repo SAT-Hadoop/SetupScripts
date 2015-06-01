@@ -41,5 +41,6 @@
   "post-processors": [
   {
     "type": "vagrant"
+    "output": "vagrant-box/packer_{{.BuildName}}_{{.Provider}}.box" 
   }]
 }
