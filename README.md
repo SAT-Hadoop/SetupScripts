@@ -19,40 +19,34 @@ Backend Worker , looks into the mq and processes the jobs one after another
 Autoscaling groups, The Scheduler, mq and the backend workers all within Autoscaling groups and can scale up/down depending on demand.
 </ol>
 
-<h1> Below are the instructions used to setup the indivijual components of sat-hadoop </h1>
+<h4> Below are the instructions used to setup the indivijual components of sat-hadoop on UBUNTU</h4>
 
 
-<h1>Instructions to setup the Scheduler</h1>
+<h4>Instructions to setup the Scheduler</h4>
 <ol>
-import your AWS credentials to AWSACCESSKEY and AWSSECRETKEY using the export command
+Launch an ec2 instance with ubuntu-xx.xx as the OS.
 </ol>
 <ol>
-Clone the scheduler-setup.sh and run it
+Clone the current repo and run scheduler-setup.sh
 </ol>
+<ol>
 Open http://ipaddress/app/index in the browser to get started
 </ol>
 
 
 
-<h1> Instructions to using these scripts to setup a hadoop cluster </h1>
-<h4> You will need a ubuntu system to be able to run the scripts </h4>
+<h4> Instructions to setup the backend worker/workers </h4>
 <hr>
 <ol>
-Run setup-hadoop.sh on the master
+Launch as many ec2 instances as you need ec2 with ubuntu-xx.xx as the OS attaching the setup-hadoop.sh at the time of instance creation.
 </ol>
 <ol>
-Launch all the necessary slaves and gather their ip addresses. Use the same pem file as the master
+Login to the instance, clone the current repository
 </ol>
 <ol>
-Add them to slaves list in /hadoop-2.6.1/etc/hadoop/slaves
+clone the repo's https://github.com/SAT-Hadoop/BackendWorker and https://github.com/SAT-Hadoop/sat-hadoop-api. Do a mvn install on sat-hadoop-api followed by BackendWorker
 </ol>
-<ol>
-have the pem file, setup-hadoop.sh,syncslaves.sh in the same directory
-</ol>
-<ol>
-Run the syncslaves.sh and you are good to go
-</ol>
-<ol>
-On the master, do a start-all.sh
-</ol>
+
+<h4> Instructions to setup the sqs </h4>
+
 ~                 
