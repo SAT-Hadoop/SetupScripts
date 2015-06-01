@@ -28,10 +28,11 @@ sudo service ganglia-monitor restart
 sudo service gmetad restart
 sudo service apache2 restart
 
-# Configure and Install rsyslog
-sudo echo "mariadb-server-5.5 mariadb-server/root_password password string $MARIADBPASSWORD" |sudo  debconf-set-selections
-sudo echo "mariadb-server-5.5 mariadb-server/root_password_again password string $MARIADBPASSWORD" | sudo debconf-set-selections
-sudo apt-get install -y rsyslog mariadb-server
+# Configure and Install rsyslog and provide mariadb for logging
+# http://dba.stackexchange.com/questions/35866/install-mariadb-without-password-prompt-in-ubuntu?newreg=426e4e37d5a2474795c8b1c911f0fb9f
+echo "mariadb-server-5.5 mariadb-server/root_password $MARIADBPASSWORD" |sudo  debconf-set-selections
+echo "mariadb-server-5.5 mariadb-server/root_password_again $MARIADBPASSWORD" | sudo debconf-set-selections
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y rsyslog mariadb-server
 
 sudo sed -i 's/#$ModLoad imudp/$ModLoad imudp/g' /etc/rsyslog.conf
 sudo sed -i 's/#$UDPServerRun 514/$UDPServerRun 514/g' /etc/rsyslog.conf
