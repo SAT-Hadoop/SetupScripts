@@ -18,9 +18,7 @@ The post_install_eucalyptus.sh file is where all the customization takes place
 
 note that this config will strip all login access - its only to be prepared for Eucalyptus
 
-See the vagrant box folder for a version you can do local testing on
-
-final command to prep the output folder [is at this repo](https://github.com/viglesiasce/cloud-images/)
+Final command to prep the output folder [is at this repo](https://github.com/viglesiasce/cloud-images/)
 
 It needs to be done on a system that has the eucalyptus-nc tools and libguestfs-tools-c -- which means Centos 6.6
 
@@ -29,4 +27,14 @@ It needs to be done on a system that has the eucalyptus-nc tools and libguestfs-
 This command then needs to be done on a system on the network with your eucalyptus credentials sources and euca2ools installed - if you are on campus then you can do from a Centos sysetm - if not you can copy the output-qemu directory over to your Ubuntu partition and use the VPN there.
 `euca-install-image -i output-qemu/ubuntu-base.raw --virtualization-type hvm -b ubuntu-base -r x86_64 --name ubuntu-base`
 
+## Time
+End to end install (not counting the download of the initial Ubuntu ISO and on a home wired lan)
+real	15m51.855s
+user	6m20.665s
+sys	1m4.881s
 
+Processor
+Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz -- 1st Gen Core I series
+http://ark.intel.com/products/50178/Intel-Core-i3-380M-Processor-3M-Cache-2_53-GHz
+8 GB RAM
+5400 RPM HDD
