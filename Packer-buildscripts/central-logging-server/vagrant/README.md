@@ -1,32 +1,30 @@
-## Build Scripts
+## Build Script 
 
-Build Scripts for Packer Eucalyptus images and SAT-Hadoop project - central loggin server 
-
+Build Scripts for our central logging server into a vagrant box for testing from a KVM/qemu source
+ 
 ### Contents of these build scripts
-- the hardrive size can be edited in ubuntu-packer.json
-- post_install.sh installs...
-  * Installs rsyslog (8.9.0) configures it as a centralized rsyslog server receiving logs from others and storing them in a mariadb database
+- the hardrive size can be edited in ubuntu-packer-vagrant.json
+- post_install_vagrant.sh installs...
+  * Installs rsyslog (8.10.0) configures it as a centralized rsyslog server receiving logs from others and storing them in a mariadb database
   * All package dependencies and pre-reqs (in preseed.cfg) `build-essential ssh curl rsync git unzip wget vim python-software-properties software-properties-common ganglia-monitor rrdtool gmetad ganglia-webfrontend mariadb-server`
   * Install Ganglia and configures it as a centralized logging system
 
 ### Usage Instructions
 - Download [packer] (https://dl.bintray.com/mitchellh/packer/packer_0.7.5_linux_amd64.zip) 
-- run packer validte ubuntu-packer.json   
-- run packer build ubuntu-packer.json
+- run packer validte ubuntu-packer-vagrant.json   
+- run packer build ubuntu-packer-vagrant.json
 
-the post_install.sh file is where all the customization takes place
+The post_install_vagrant.sh file is where all the customization takes place
 
-note that this config will strip all login access - its only to be prepared for Eucalyptus
+Account login information is in the .json file
+uname: vagrant
+passwd: password
 
-See the vagrant box folder for a version you can do local testing on
+See the vagrant-box folder for a version you can do local testing on
 
-final command to prep the output folder [is at this repo](https://github.com/viglesiasce/cloud-images/)
+Go to http://vagrantup.com for instructions to run Vagrant
 
-It needs to be done on a system that has the eucalyptus-nc tools and libguestfs-tools-c -- which means Centos 6.6
-
-`virt-sysprep -a output-qemu/*.raw`
-
-This command then needs to be done on a system on the network with your eucalyptus credentials sources and euca2ools installed - if you are on campus then you can do from a Centos sysetm - if not you can copy the output-qemu directory over to your Ubuntu partition and use the VPN there.
-`euca-install-image -i output-qemu/ubuntu-base.raw --virtualization-type hvm -b ubuntu-base -r x86_64 --name ubuntu-base`
+Total build time estimate:
+23 minutes on my Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz 8 GB of ram 5400 RPM HDD
 
 
