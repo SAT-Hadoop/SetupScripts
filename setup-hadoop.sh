@@ -284,42 +284,76 @@ echo "
 " > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
 echo "
-<!-- In: conf/mapred-site.xml -->
 <configuration>
 <property>
   <name>mapred.job.tracker</name>
   <value>master:54311</value>
-  <description>The host and port that the MapReduce job tracker runs
-  at.  If "local", then jobs are run in-process as a single map
-  and reduce task.
-  </description>
 </property>
-</configuration>
+<property>
+  <name> mapreduce.framework.name</name>
+  <value>yarn</value>
+</property>
+<property>
+    <name>mapred.compress.map.output</name>
+    <value>true</value>
+</property>
+<property>
+    <name>mapred.map.output.compression.codec</name>
+    <value>com.hadoop.compression.lzo.LzoCodec</value>
+</property>
+<property>
+    <name>io.sort.mb</name>
+    <value>800</value>
+</property>
+<property>
+<name>mapreduce.map.memory.mb</name>
+<value>600</value>
+</property>
+<property>
+<name>mapreduce.reduce.memory.mb</name>
+<value>600</value>
+</property>
+<property>
+<name>mapreduce.map.java.opts</name>
+<value>-Xmx500m</value>
+</property>
+</property>
+<name>mapreduce.reduce.java.opts</name>
+<value>-Xmx500m</value>
+
 " > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
 echo"
-<configuration>
+ <configuration>
   <property>
-    <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>master:8031</value>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
   </property>
   <property>
-    <name>yarn.resourcemanager.address</name>
-    <value>master:8032</value>
+    <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+    <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>master:8025</value>
   </property>
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
     <value>master:8030</value>
   </property>
   <property>
-    <name>yarn.resourcemanager.admin.address</name>
-    <value>master:8033</value>
+    <name>yarn.resourcemanager.address</name>
+    <value>master:8040</value>
   </property>
-  <property>
-    <name>yarn.resourcemanager.webapp.address</name>
-    <value>master:8088</value>
-  </property>
-</configuration>
+ <property>
+  <name>yarn.nodemanager.resource.memory-mb</name>
+  <value>1600</value>
+</property>
+<property>
+<name>yarn.scheduler.minimum-allocation-mb</name>
+<value>600</value>
+</property>
+ </configuration>
 
 "> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
 
