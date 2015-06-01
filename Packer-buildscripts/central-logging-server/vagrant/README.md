@@ -24,7 +24,16 @@ See the vagrant-box folder for a version you can do local testing on
 
 Go to http://vagrantup.com for instructions to run Vagrant
 
-Total build time estimate:
-23 minutes on my Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz 8 GB of ram 5400 RPM HDD
+###Total build time:
+real	28m27.374s
+user	14m28.827s
+sys	1m57.265s
+
+
+Processor:
+Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz -- 1st Gen Core I series
+http://ark.intel.com/products/50178/Intel-Core-i3-380M-Processor-3M-Cache-2_53-GHz
+8 GB RAM
+5400 RPM HDD
 
 
