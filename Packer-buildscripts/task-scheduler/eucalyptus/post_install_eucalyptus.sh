@@ -10,9 +10,9 @@ sudo apt-get install -y rsyslog
 
 # Oracle JDK needed for some of the glassfish packages - It has a license you need to accpet - here is how to auto do that
 # http://askubuntu.com/questions/190582/installing-java-automatically-with-silent-option
-sudo echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+sudo echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 #http://www.himpfen.com/install-java-ubuntu/
-sudo apt-get install oracle-java7-installer  
+sudo apt-get install -y oracle-java7-installer  
 
 # Install aws-cli
 sudo pip install awscli
@@ -36,34 +36,10 @@ sudo service ganglia-monitor restart
 # Again assuming that the IP here is the private cloud IP of the Central Rsyslog server
 sudo sed -i "$ a *.* @192.168.98.218:514" /etc/rsyslog.conf 
 
-# Install Task Scheduler Application
-wget --directory-prefix=/tmp download.java.net/glassfish/4.0/release/glassfish-4.0.zip
-sudo unzip /tmp/glassfish-4.0.zip -d /opt
-sudo chmod 777 -R /opt/*
-cat /opt/glassfish4/glassfish/domains/domain1/config/domain.xml | sed 's/"8080"/"80"/' > temp
-sudo cp temp /opt/glassfish4/glassfish/domains/domain1/config/domain.xml
-sudo /opt/glassfish4/bin/asadmin start-domain
-
-sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false http-redirect
-sudo /opt/glassfish4/bin/asadmin  create-protocol-filter --protocol http-redirect --classname com.sun.grizzly.config.HttpRedirectFilter redirect-filter
-
-sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false pu-protocol
-
-sudo /opt/glassfish4/bin/asadmin create-protocol-finder --protocol pu-protocol --targetprotocol http-listener-2 --classname org.glassfish.grizzly.config.portunif.HttpProtocolFinder http-finder
-
-sudo /opt/glassfish4/bin/asadmin create-protocol-finder --protocol pu-protocol --targetprotocol http-redirect --classname org.glassfish.grizzly.config.portunif.HttpProtocolFinder http-redirect
-
-sudo /opt/glassfish4/bin/asadmin  set configs.config.server-config.network-config.network-listeners.network-listener.http-listener-1.protocol=pu-protocol
-
-sudo rm -r sat-hadoop-api
-sudo rm -r HadoopAutomation
-git clone https://github.com/saipramod/HadoopAutomation.git /tmp/HadoopAutomation
-git clone https://github.com/saipramod/sat-hadoop-api.git /tmp/sat-hadoop-api
-cd /tmp/sat-hadoop-api/
-sudo mvn clean install
-cd /tmp/HadoopAutomation/
-sudo mvn clean install
-sudo /opt/glassfish4/bin/asadmin deploy --force=true target/*.war
+# Install Task Scheduler Application by running setup-scripts sh from Github repo
+wget --directory-prefix=/tmp https://raw.githubusercontent.com/SAT-Hadoop/SetupScripts/master/scheduler-setup.sh
+chmod u+x /tmp/scheduler-setup.sh
+./tmp/scheduler-setup.sh
 
 
 # ending configuration and poweroff
