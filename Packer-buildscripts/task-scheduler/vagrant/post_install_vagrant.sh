@@ -3,9 +3,17 @@ set -e
 set -v
 
 echo password | sudo -S add-apt-repository -y ppa:adiscon/v8-stable
+echo password | sudo -S add-apt-repository -y ppa:webupd8team/java
 
-echo password | sudo -S  apt-get update 
-sudo apt-get install -y rsyslog 
+echo password | sudo -S  apt-get update
+sudo apt-get install -y rsyslog
+
+# Oracle JDK needed for some of the glassfish packages - It has a license you ne
+ed to accpet - here is how to auto do that
+# http://askubuntu.com/questions/190582/installing-java-automatically-with-silent-option
+sudo echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+#http://www.himpfen.com/install-java-ubuntu/
+sudo apt-get install oracle-java7-installer
 
 # Install aws-cli
 sudo pip install awscli
