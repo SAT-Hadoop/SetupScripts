@@ -25,15 +25,15 @@ if ! hash mvn 2>/dev/null;
 
 fi 
 
-cd /tmp
-wget --progress=dot download.java.net/glassfish/4.0/release/glassfish-4.0.zip
-sudo unzip glassfish-4.0.zip -d /opt
+wget --directory-prefix=/tmp --progress=dot download.java.net/glassfish/4.0/release/glassfish-4.0.zip
+sudo unzip /tmp/glassfish-4.0.zip -d /opt
 sudo chmod 777 -R /opt/*
 cat /opt/glassfish4/glassfish/domains/domain1/config/domain.xml | sed 's/"8080"/"80"/' > temp
 sudo cp temp /opt/glassfish4/glassfish/domains/domain1/config/domain.xml
 sudo /opt/glassfish4/bin/asadmin start-domain
 
 sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false http-redirect
+
 sudo /opt/glassfish4/bin/asadmin  create-protocol-filter --protocol http-redirect --classname com.sun.grizzly.config.HttpRedirectFilter redirect-filter
 
 sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false pu-protocol
@@ -44,22 +44,22 @@ sudo /opt/glassfish4/bin/asadmin create-protocol-finder --protocol pu-protocol -
 
 sudo /opt/glassfish4/bin/asadmin  set configs.config.server-config.network-config.network-listeners.network-listener.http-listener-1.protocol=pu-protocol
 
-if [ -a sat-hadoop-api ]
+if [ -a /tmp/sat-hadoop-api ]
   then
-    sudo rm -r sat-hadoop-api
+    echo "removing currently existing sat-hadoop-api directory\n"
+    sudo rm -r /tmp/sat-hadoop-api
 fi
 
-if [ -a HadoopAutomation ]
+if [ -a /tmp/HadoopAutomation ]
   then
-    sudo rm -r HadoopAutomation
+    echo "Removing currently existing HadoopAutomation directory\n"
+    sudo rm -r /tmp/HadoopAutomation
 fi
 
-git clone https://github.com/saipramod/HadoopAutomation.git
-git clone https://github.com/saipramod/sat-hadoop-api.git
+git clone https://github.com/saipramod/HadoopAutomation.git /tmp/HadoopAutomation
+git clone https://github.com/saipramod/sat-hadoop-api.git /tmp/sat-hadoop-api
 
-cd sat-hadoop-api/
-mvn clean install
-cd ..
-cd HadoopAutomation/
-mvn clean install
+mvn clean install -f /tmp/sat-hadoop-api/pom.xml
+mvn clean install -f /tmp/HadoopAutomation/pom.xml
+
 sudo /opt/glassfish4/bin/asadmin deploy --force=true target/*.war
