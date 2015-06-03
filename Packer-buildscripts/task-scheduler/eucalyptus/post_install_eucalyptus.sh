@@ -38,7 +38,7 @@ sudo sed -i "$ a *.* @192.168.98.218:514" /etc/rsyslog.conf
 
 # Install Task Scheduler Application by running setup-scripts sh from Github repo
 wget --directory-prefix=/tmp https://raw.githubusercontent.com/SAT-Hadoop/SetupScripts/master/scheduler-setup.sh
-chmod u+x /tmp/scheduler-setup.sh
+chmod o+x /tmp/scheduler-setup.sh
 /tmp/scheduler-setup.sh
 
 
