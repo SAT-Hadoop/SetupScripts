@@ -33,7 +33,6 @@ sudo cp temp /opt/glassfish4/glassfish/domains/domain1/config/domain.xml
 sudo /opt/glassfish4/bin/asadmin start-domain
 
 sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false http-redirect
-
 sudo /opt/glassfish4/bin/asadmin  create-protocol-filter --protocol http-redirect --classname com.sun.grizzly.config.HttpRedirectFilter redirect-filter
 
 sudo /opt/glassfish4/bin/asadmin  create-protocol --securityenabled=false pu-protocol
