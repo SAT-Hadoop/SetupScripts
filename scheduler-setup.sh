@@ -59,10 +59,10 @@ if [ -a /tmp/HadoopAutomation ]
     sudo rm -r /tmp/HadoopAutomation
 fi
 
-git clone https://github.com/saipramod/HadoopAutomation.git /tmp/HadoopAutomation
-git clone https://github.com/saipramod/sat-hadoop-api.git /tmp/sat-hadoop-api
+git clone https://github.com/saipramod/HadoopAutomation.git ~/HadoopAutomation
+git clone https://github.com/saipramod/sat-hadoop-api.git ~/sat-hadoop-api
 
-mvn clean install -f /tmp/sat-hadoop-api/pom.xml
-mvn clean install -f /tmp/HadoopAutomation/pom.xml
+mvn clean install -f ~/sat-hadoop-api/pom.xml
+mvn clean install -f ~/HadoopAutomation/pom.xml
 
-sudo /opt/glassfish4/bin/asadmin deploy --force=true target/*.war
+sudo /opt/glassfish4/bin/asadmin deploy --force=true ~/HadoopAutomation/target/*.war
