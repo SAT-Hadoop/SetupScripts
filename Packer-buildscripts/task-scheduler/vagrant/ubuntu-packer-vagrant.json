@@ -1,4 +1,4 @@
-{
+
 "builders": [
   {
   "type": "qemu",
@@ -40,7 +40,8 @@
   }],
   "post-processors": [
   {
-  "type": "vagrant" 
+  "type": "vagrant",
+  "output": "./vagrant-build/packer_{{.BuildName}}_{{.Provider}}.box" 
   }]
 
 }
