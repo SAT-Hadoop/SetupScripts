@@ -12,7 +12,7 @@ if ! hash mvn 2>/dev/null;
   then
 
   sudo apt-get update
-  sudo apt-get -y vim
+  sudo apt-get -y install vim
   sudo apt-get -y install ssh
   sudo apt-get -y install rsync
   sudo apt-get -y install python-software-properties
