@@ -24,13 +24,7 @@ note that this config will strip all login access - its only to be prepared for 
 
 See the vagrant box folder for a version you can do local testing on
 
-final command to prep the output folder [is at this repo](https://github.com/viglesiasce/cloud-images/)
+You can use the push-vagrant-to-walrus.sh to move your finished box to Walrus server (note this precludes you have s3cmd installed and are on the VPN or same local network as your walrus)
 
-It needs to be done on a system that has the eucalyptus-nc tools and libguestfs-tools-c -- which means Centos 6.6
-
-`virt-sysprep -a output-qemu/*.raw`
-
-This command then needs to be done on a system on the network with your eucalyptus credentials sources and euca2ools installed - if you are on campus then you can do from a Centos sysetm - if not you can copy the output-qemu directory over to your Ubuntu partition and use the VPN there.
-`euca-install-image -i output-qemu/ubuntu-base.raw --virtualization-type hvm -b ubuntu-base -r x86_64 --name ubuntu-base`
 
 
