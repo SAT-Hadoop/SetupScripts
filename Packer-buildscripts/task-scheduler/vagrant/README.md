@@ -7,6 +7,8 @@ Build Scripts for Packer Eucalyptus images and SAT-Hadoop project - task schedul
 - post_install.sh installs...
   * Installs rsyslog (8.9.0) configures it as a client that send its logs to a remote central rsyslog server
   * All package dependencies and pre-reqs (in preseed.cfg) `build-essential ssh curl rsync git unzip wget vim python-software-properties software-properties-common python-pip sysstat openjdk-7-jdk` 
+  * added python-magic to base system used to build the image from yum to handle vagrant conversion (optional)
+
   *  some of the jars require the Oracle JDK 7 to be installed as opposed to the openjdk 7 - [Link to how to here](http://www.himpfen.com/install-java-ubuntu/)
   * awscli via python-pip
   * Install Ganglia and configure it as a client system
