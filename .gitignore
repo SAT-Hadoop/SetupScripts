@@ -2,3 +2,4 @@ packer_cache/
 output-qemu/
 *.box
 vagrant-build/
+md5sum.txt
