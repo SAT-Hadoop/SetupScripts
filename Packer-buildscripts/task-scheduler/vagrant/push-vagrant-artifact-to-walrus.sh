@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+set -x
 
 # Remove any pre-existing image
 s3cmd -v --recursive del s3://vagrant-builds/vagrant-build
