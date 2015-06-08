@@ -48,5 +48,5 @@ clone the repo's https://github.com/SAT-Hadoop/BackendWorker and https://github.
 </ol>
 
 <h4> Instructions to setup the sqs </h4>
+<p> Under development </p>
 
-~                 
