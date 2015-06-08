@@ -1,3 +1,12 @@
+##################################################
+# Script responsible for creating a hadoop cluster
+# All issues right from networking to config are 
+# handled by this script 
+##################################################
+
+
+# Ensure the /etc/hosts is populated with only what is necessary
+
 /bin/echo '
 127.0.0.1       localhost
 127.0.1.1       ubuntu
@@ -24,6 +33,8 @@ echo 'euca-i'$IPADDRMOD'.eucalyptus.internal' > /etc/hostname
 /usr/sbin/service hostname stop
 /usr/sbin/service hostname start
 "
+# Push all the hadoop config to the slaves
+
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/hadoop-env.sh root@$i:/root/hadoop-2.6.0/etc/hadoop/
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/yarn-env.sh root@$i:/root/hadoop-2.6.0/etc/hadoop/
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/mapred-site.xml root@$i:/root/hadoop-2.6.0/etc/hadoop/
@@ -31,6 +42,7 @@ echo 'euca-i'$IPADDRMOD'.eucalyptus.internal' > /etc/hostname
 /usr/bin/scp /root/hadoop-2.6.0/etc/hadoop/hdfs-site.xml root@$i:/root/hadoop-2.6.0/etc/hadoop/
 done
 
+# Push the final list conprising of "all nodes" to "all nodes"
 for i in `cat /root/hadoop-2.6.0/etc/hadoop/slaves`
 do
 /usr/bin/scp /etc/hosts root@$i:/etc/hosts
