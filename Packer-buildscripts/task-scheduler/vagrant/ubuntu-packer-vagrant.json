@@ -41,7 +41,8 @@
   "post-processors": [
   {
   "type": "vagrant",
-  "output": "./vagrant-build/packer_{{.BuildName}}_{{.Provider}}_{{timestamp}}.box" 
+  "output": "./vagrant-build/ubuntu-task-scheduler-packer-vagrant-build-{{timestamp}}.box",
+  "compression_level": 9 
   }]
 
 }
