@@ -1,5 +1,18 @@
+#!/bin/bash
+# set e will halt the shell script if there is an error
+set -e 
+# set x will show verbose output
+set -x
+
+# how to check if an application exists previously in a shell script
+# http://stackoverflow.com/questions/592620/check-if-a-program-exists-from-a-bash-script
+# note I chose Maven as the test itme because it is not commonly installed also the Maven dependency is in the pressed file for the ubuntu install
+
+if ! hash mvn 2>/dev/null; 
+  then
+
 sudo apt-get update
-sudo apt-get -y vim
+sudo apt-get -y install vim
 sudo apt-get -y install openjdk-7-jdk
 sudo apt-get -y install ssh 
 sudo apt-get -y install rsync
@@ -8,10 +21,14 @@ sudo apt-get -y install curl
 sudo apt-get -y install git
 sudo apt-get -y install unzip
 sudo apt-get -y install python-pip
+sudo apt-get -y install mvn
 pip install awscli
+
+fi
+
 cd $HOME
-wget http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
-tar -zxvf  hadoop-2.6.0.tar.gz
+wget --directory-prefix=~ --progress=dot http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
+tar -zxvf  ~/hadoop-2.6.0.tar.gz
 echo '
 export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -134,7 +151,7 @@ fi
 YARN_OPTS="$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE"
 
 
-' > $HOME/hadoop-2.6.0/etc/hadoop/yarn-env.sh
+' > ~/hadoop-2.6.0/etc/hadoop/yarn-env.sh
 
 echo '
 export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one
@@ -237,7 +254,7 @@ export HADOOP_SECURE_DN_PID_DIR=${HADOOP_PID_DIR}
 export HADOOP_IDENT_STRING=$USER
 
 
-' > $HOME/etc/hadoop/hadoop-env.sh
+' > ~/etc/hadoop/hadoop-env.sh
 
 
 echo "
@@ -252,7 +269,7 @@ echo "
   determine the host, port, etc. for a filesystem.</description>
 </property>
 </configuration>
-" > $HOME/hadoop-2.6.0/etc/hadoop/core-site.xml
+" > ~/hadoop-2.6.0/etc/hadoop/core-site.xml
 
 echo "
 <!-- In: conf/hdfs-site.xml -->
@@ -281,7 +298,7 @@ echo "
 
 
 </configuration>
-" > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
+" > ~/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
 echo "
 <configuration>
@@ -321,7 +338,7 @@ echo "
 <name>mapreduce.reduce.java.opts</name>
 <value>-Xmx500m</value>
 
-" > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
+" > ~/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
 echo"
  <configuration>
@@ -355,14 +372,11 @@ echo"
 </property>
  </configuration>
 
-"> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
-
-
-
+"> ~/hadoop-2.6.0/etc/hadoop/yarn-site.xml
 
 echo "
 export JAVA_HOME=/usr
-export PATH=$PATH:$HOME/hadoop-2.6.0/bin:$HOME/hadoop-2.6.0/sbin:/usr
+export PATH=$PATH:~/hadoop-2.6.0/bin:~/hadoop-2.6.0/sbin:/usr
 " >> ~/.bashrc
 
 cat $HOME/hadoop-2.6.0/etc/hadoop/hadoop-env.sh | sed 's/export JAVA_HOME/#/' > tmp
