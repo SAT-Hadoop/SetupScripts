@@ -4,25 +4,36 @@ set -x
 
 #this script will rm -rf any existing artifacts to start fresh
 
-if [ -a output-qemu ]
-  then
-    rm -rf output-qemu
-fi
+if [ "$#" -eq 1 ]; then
 
-# validate the packer build script here
+  if [ -a output-qemu ]
+    then
+      rm -rf output-qemu
+  fi
 
-../../../../packer-tool/packer validate ubuntu-packer-eucalyptus.json
+  # validate the packer build script here
 
-# packer build ubuntu-packer-eucalyptus.json
-../../../../packer-tool/packer build ubuntu-packer-eucalyptus.json
+  ../../../../packer-tool/packer validate ubuntu-packer-eucalyptus.json
 
-#Does the local finishing touches
-./sysprep-script.sh
+  # packer build ubuntu-packer-eucalyptus.json
+  ../../../../packer-tool/packer build ubuntu-packer-eucalyptus.json
 
-# has code to also delete prior images and update to the new one
+  #Does the local finishing touches
+  ./sysprep-script.sh
 
-./push-sysprepped-system-eucalyptus.sh
-echo "++++++++++++++++++++++++++++++++++++++++++++"
-echo "All Done"
-echo "++++++++++++++++++++++++++++++++++++++++++++"
-echo " "
+  # has code to also delete prior images and update to the new one
+
+  ./push-sysprepped-system-eucalyptus.sh $1
+  echo "++++++++++++++++++++++++++++++++++++++++++++"
+  echo "All Done"
+  echo "++++++++++++++++++++++++++++++++++++++++++++"
+  echo " "
+
+else
+
+ echo "Missing system type parameter - BUILD or TEST"
+
+fi 
+
+
+
