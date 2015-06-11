@@ -29,7 +29,9 @@ fi
 wget --directory-prefix=$HOME --progress=dot http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
 tar -zxvf  $HOME/hadoop-2.6.0.tar.gz
 echo '
-export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one or more
+export JAVA_HOME=/usr 
+
+# Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
 # The ASF licenses this file to You under the Apache License, Version 2.0
@@ -150,7 +152,7 @@ fi
 YARN_OPTS="$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE"
 
 
-' > ~/hadoop-2.6.0/etc/hadoop/yarn-env.sh
+' > $HOME/hadoop-2.6.0/etc/hadoop/yarn-env.sh
 
 echo '
 export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one
@@ -253,7 +255,7 @@ export HADOOP_SECURE_DN_PID_DIR=${HADOOP_PID_DIR}
 export HADOOP_IDENT_STRING=$USER
 
 
-' > ~/etc/hadoop/hadoop-env.sh
+' > $HOME/etc/hadoop/hadoop-env.sh
 
 
 echo "
@@ -268,7 +270,7 @@ echo "
   determine the host, port, etc. for a filesystem.</description>
 </property>
 </configuration>
-" > ~/hadoop-2.6.0/etc/hadoop/core-site.xml
+" > $HOME/hadoop-2.6.0/etc/hadoop/core-site.xml
 
 echo "
 <!-- In: conf/hdfs-site.xml -->
@@ -297,7 +299,7 @@ echo "
 
 
 </configuration>
-" > ~/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
+" > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
 echo "
 <configuration>
@@ -338,7 +340,7 @@ echo "
 <value>-Xmx500m</value>
 </configuration>
 
-" > ~/hadoop-2.6.0/etc/hadoop/mapred-site.xml
+" > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
 echo"
  <configuration>
@@ -372,12 +374,12 @@ echo"
 </property>
  </configuration>
 
-"> ~/hadoop-2.6.0/etc/hadoop/yarn-site.xml
+"> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
 
 echo "
 export JAVA_HOME=/usr
-export PATH=$PATH:~/hadoop-2.6.0/bin:~/hadoop-2.6.0/sbin:/usr
-" >> ~/.bashrc
+export PATH=$PATH:$HOME/hadoop-2.6.0/bin:$HOME/hadoop-2.6.0/sbin:/usr
+" >> $HOME/.bashrc
 
 cat $HOME/hadoop-2.6.0/etc/hadoop/hadoop-env.sh | sed 's/export JAVA_HOME/#/' > tmp
 (echo -n 'export JAVA_HOME=/usr '; cat tmp) > $HOME//hadoop-2.6.0/etc/hadoop/hadoop-env.sh
