@@ -337,6 +337,7 @@ echo "
 </property>
 <name>mapreduce.reduce.java.opts</name>
 <value>-Xmx500m</value>
+</configuration>
 
 " > ~/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
