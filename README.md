@@ -47,6 +47,6 @@ Login to the instance, clone the current repository
 clone the repo's https://github.com/SAT-Hadoop/BackendWorker and https://github.com/SAT-Hadoop/sat-hadoop-api. Do a mvn install on sat-hadoop-api followed by BackendWorker
 </ol>
 
-<h4> Instructions to setup the sqs </h4>
-<p> Under development </p>
+<h4> Instructions to setup the Rabbit MQ</h4>
+<p> sudo apt-get install rabbitmq-server </p>
 
