@@ -3,7 +3,17 @@
 set -e
 set -x
 
-rm -rfv ./vagrant-build
+if [ -d ./vagrant-build ]; then
+ 
+  rm -rfv ./vagrant-build
+
+fi
+
+if [ -d ./output-qemu ]; then
+
+  rm -rfv ./output-qemu
+
+fi
 
 ../../../../packer-tool/packer validate ubuntu-packer-vagrant.json
 
