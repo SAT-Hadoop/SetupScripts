@@ -29,41 +29,20 @@ fi
 wget --directory-prefix=$HOME --progress=dot http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
 tar -zxvf  $HOME/hadoop-2.6.0.tar.gz
 echo '
-export JAVA_HOME=/usr 
-
-# Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements.  See the NOTICE file distributed with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to You under the Apache License, Version 2.0
-# (the "License"); you may not use this file except in compliance with
-# the License.  You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
+export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one or more
 # User for YARN daemons
 export HADOOP_YARN_USER=${HADOOP_YARN_USER:-yarn}
-
 # resolve links - $0 may be a softlink
 export YARN_CONF_DIR="${YARN_CONF_DIR:-$HADOOP_YARN_HOME/conf}"
-
-# some Java parameters
 # #=/home/y/libexec/jdk1.6.0/
 if [ "$JAVA_HOME" != "" ]; then
   #echo "run java in $JAVA_HOME"
   JAVA_HOME=$JAVA_HOME
 fi
-  
 if [ "$JAVA_HOME" = "" ]; then
   echo "Error: JAVA_HOME is not set."
   exit 1
 fi
-
 JAVA=$JAVA_HOME/bin/java
 JAVA_HEAP_MAX=-Xmx1000m 
 
@@ -75,47 +54,6 @@ JAVA_HEAP_MAX=-Xmx1000m
 if [ "$YARN_HEAPSIZE" != "" ]; then
   JAVA_HEAP_MAX="-Xmx""$YARN_HEAPSIZE""m"
 fi
-
-# Resource Manager specific parameters
-
-# Specify the max Heapsize for the ResourceManager using a numerical value
-# in the scale of MB. For example, to specify an jvm option of -Xmx1000m, set
-# the value to 1000.
-# This value will be overridden by an Xmx setting specified in either YARN_OPTS
-# and/or YARN_RESOURCEMANAGER_OPTS.
-# If not specified, the default value will be picked from either YARN_HEAPMAX
-# or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
-#export YARN_RESOURCEMANAGER_HEAPSIZE=1000
-
-# Specify the max Heapsize for the timeline server using a numerical value
-# in the scale of MB. For example, to specify an jvm option of -Xmx1000m, set
-# the value to 1000.
-# This value will be overridden by an Xmx setting specified in either YARN_OPTS
-# and/or YARN_TIMELINESERVER_OPTS.
-# If not specified, the default value will be picked from either YARN_HEAPMAX
-# or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
-#export YARN_TIMELINESERVER_HEAPSIZE=1000
-
-# Specify the JVM options to be used when starting the ResourceManager.
-# These options will be appended to the options specified as YARN_OPTS
-# and therefore may override any similar flags set in YARN_OPTS
-#export YARN_RESOURCEMANAGER_OPTS=
-
-# Node Manager specific parameters
-
-# Specify the max Heapsize for the NodeManager using a numerical value
-# in the scale of MB. For example, to specify an jvm option of -Xmx1000m, set
-# the value to 1000.
-# This value will be overridden by an Xmx setting specified in either YARN_OPTS
-# and/or YARN_NODEMANAGER_OPTS.
-# If not specified, the default value will be picked from either YARN_HEAPMAX
-# or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
-#export YARN_NODEMANAGER_HEAPSIZE=1000
-
-# Specify the JVM options to be used when starting the NodeManager.
-# These options will be appended to the options specified as YARN_OPTS
-# and therefore may override any similar flags set in YARN_OPTS
-#export YARN_NODEMANAGER_OPTS=
 
 # so that filenames w/ spaces are handled correctly in loops below
 IFS=
@@ -137,7 +75,6 @@ fi
 # restore ordinary behaviour
 unset IFS
 
-
 YARN_OPTS="$YARN_OPTS -Dhadoop.log.dir=$YARN_LOG_DIR"
 YARN_OPTS="$YARN_OPTS -Dyarn.log.dir=$YARN_LOG_DIR"
 YARN_OPTS="$YARN_OPTS -Dhadoop.log.file=$YARN_LOGFILE"
@@ -156,39 +93,8 @@ YARN_OPTS="$YARN_OPTS -Dyarn.policy.file=$YARN_POLICYFILE"
 
 echo '
 export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one
-# or more contributor license agreements.  See the NOTICE file
-# distributed with this work for additional information
-# regarding copyright ownership.  The ASF licenses this file
-# to you under the Apache License, Version 2.0 (the
-# "License"); you may not use this file except in compliance
-# with the License.  You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Set Hadoop-specific environment variables here.
-
-# The only required environment variable is JAVA_HOME.  All others are
-# optional.  When running a distributed configuration it is best to
-# set JAVA_HOME in this file, so that it is correctly defined on
-# remote nodes.
-
-# The java implementation to use.
-#=${JAVA_HOME}
-
-# The jsvc implementation to use. Jsvc is required to run secure datanodes
-# that bind to privileged ports to provide authentication of data transfer
-# protocol.  Jsvc is not required if SASL is configured for authentication of
-# data transfer protocol using non-privileged ports.
-#export JSVC_HOME=${JSVC_HOME}
-
 export HADOOP_CONF_DIR=${HADOOP_CONF_DIR:-"/etc/hadoop"}
-
+export HADOOP_HOME=/root/hadoop-2.6.0/
 # Extra Java CLASSPATH elements.  Automatically insert capacity-scheduler.
 for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
   if [ "$HADOOP_CLASSPATH" ]; then
@@ -197,18 +103,9 @@ for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
     export HADOOP_CLASSPATH=$f
   fi
 done
-
-# The maximum amount of heap to use, in MB. Default is 1000.
-#export HADOOP_HEAPSIZE=
-#export HADOOP_NAMENODE_INIT_HEAPSIZE=""
-
-# Extra Java runtime options.  Empty by default.
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
-
-# Command specific options appended to HADOOP_OPTS when specified
 export HADOOP_NAMENODE_OPTS="-Dhadoop.security.logger=${HADOOP_SECURITY_LOGGER:-INFO,RFAS} -Dhdfs.audit.logger=${HDFS_AUDIT_LOGGER:-INFO,NullAppender} $HADOOP_NAMENODE_OPTS"
 export HADOOP_DATANODE_OPTS="-Dhadoop.security.logger=ERROR,RFAS $HADOOP_DATANODE_OPTS"
-
 export HADOOP_SECONDARYNAMENODE_OPTS="-Dhadoop.security.logger=${HADOOP_SECURITY_LOGGER:-INFO,RFAS} -Dhdfs.audit.logger=${HDFS_AUDIT_LOGGER:-INFO,NullAppender} $HADOOP_SECONDARYNAMENODE_OPTS"
 
 export HADOOP_NFS3_OPTS="$HADOOP_NFS3_OPTS"
@@ -218,11 +115,6 @@ export HADOOP_PORTMAP_OPTS="-Xmx512m $HADOOP_PORTMAP_OPTS"
 export HADOOP_CLIENT_OPTS="-Xmx512m $HADOOP_CLIENT_OPTS"
 #HADOOP_JAVA_PLATFORM_OPTS="-XX:-UsePerfData $HADOOP_JAVA_PLATFORM_OPTS"
 
-# On secure datanodes, user to run the datanode as after dropping privileges.
-# This **MUST** be uncommented to enable secure HDFS if using privileged ports
-# to provide authentication of data transfer protocol.  This **MUST NOT** be
-# defined if SASL is configured for authentication of data transfer protocol
-# using non-privileged ports.
 export HADOOP_SECURE_DN_USER=${HADOOP_SECURE_DN_USER}
 
 # Where log files are stored.  $HADOOP_HOME/logs by default.
@@ -231,29 +123,11 @@ export HADOOP_LOG_DIR=/vol-01/hadooplogs/
 # Where log files are stored in the secure data environment.
 export HADOOP_SECURE_DN_LOG_DIR=${HADOOP_LOG_DIR}/${HADOOP_HDFS_USER}
 
-###
-# HDFS Mover specific parameters
-###
-# Specify the JVM options to be used when starting the HDFS Mover.
-# These options will be appended to the options specified as HADOOP_OPTS
-# and therefore may override any similar flags set in HADOOP_OPTS
-#
-# export HADOOP_MOVER_OPTS=""
-
-###
-# Advanced Users Only!
-###
-
-# The directory where pid files are stored. /tmp by default.
-# NOTE: this should be set to a directory that can only be written to by 
-#       the user that will run the hadoop daemons.  Otherwise there is the
-#       potential for a symlink attack.
 export HADOOP_PID_DIR=${HADOOP_PID_DIR}
 export HADOOP_SECURE_DN_PID_DIR=${HADOOP_PID_DIR}
 
 # A string representing this instance of hadoop. $USER by default.
 export HADOOP_IDENT_STRING=$USER
-
 
 ' > $HOME/etc/hadoop/hadoop-env.sh
 
