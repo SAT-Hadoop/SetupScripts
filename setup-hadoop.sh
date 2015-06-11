@@ -11,7 +11,7 @@ set -x
 if ! hash mvn 2>/dev/null; 
   then
 
-sudo apt-get update
+sudo apt-get -y update
 sudo apt-get -y install vim
 sudo apt-get -y install openjdk-7-jdk
 sudo apt-get -y install ssh 
