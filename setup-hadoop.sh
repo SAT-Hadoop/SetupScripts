@@ -21,7 +21,7 @@ sudo apt-get -y install curl
 sudo apt-get -y install git
 sudo apt-get -y install unzip
 sudo apt-get -y install python-pip
-sudo apt-get -y install mvn
+sudo apt-get -y install maven
 pip install awscli
 
 fi
