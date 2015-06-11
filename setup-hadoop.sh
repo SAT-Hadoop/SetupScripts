@@ -26,9 +26,8 @@ pip install awscli
 
 fi
 
-cd $HOME
-wget --directory-prefix=~ --progress=dot http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
-tar -zxvf  ~/hadoop-2.6.0.tar.gz
+wget --directory-prefix=$HOME --progress=dot http://mirrors.koehn.com/apache/hadoop/common/stable/hadoop-2.6.0.tar.gz
+tar -zxvf  $HOME/hadoop-2.6.0.tar.gz
 echo '
 export JAVA_HOME=/usr # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
