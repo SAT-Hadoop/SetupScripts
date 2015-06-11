@@ -64,7 +64,7 @@ if [ "$YARN_LOG_DIR" = "" ]; then
   YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
 fi
 if [ "$YARN_LOGFILE" = "" ]; then
-  YARN_LOGFILE='yarn.log'
+  YARN_LOGFILE=yarn.log
 fi
 
 # default policy file for service-level authorization
@@ -165,14 +165,12 @@ echo "
 </property>
 <property>       
  <name>dfs.data.dir</name>       
- <value>/vol-01/hadoop/hdfs/dn</value>  
+ <value>/vol-01/hadoop/hdfs/dn</value>
  <description>Comma separated list of paths. Use the list of directories from $DFS_NAME_DIR.  
                 For example, /grid/hadoop/hdfs/nn,/grid1/hadoop/hdfs/nn.</description>
 </property>
-
-
-
 </configuration>
+
 " > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
 echo "
