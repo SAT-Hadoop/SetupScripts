@@ -5,7 +5,7 @@ set -x
 
 if [ -d ./vagrant-build ]; then
  
-  rm -rfv ./vagrant-build
+  rm -rfv ./vagrant-build/*
 
 fi
 
