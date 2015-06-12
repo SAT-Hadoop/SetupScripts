@@ -1,5 +1,5 @@
 #!/bin/bash 
-set -e
+#set -e
 set -v
 
 echo password | sudo -S add-apt-repository -y ppa:adiscon/v8-stable
