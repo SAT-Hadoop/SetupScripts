@@ -3,3 +3,5 @@ output-qemu/
 *.box
 vagrant-build/
 md5sum.txt
+vagrant-build-backend-worker/
+vagrant-build-task-scheduler/
