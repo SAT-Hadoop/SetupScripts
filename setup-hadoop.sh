@@ -58,7 +58,7 @@ fi
 # so that filenames w/ spaces are handled correctly in loops below
 IFS=
 
-YARN_LOG_DIR=/vol-01/hadooplogs/
+YARN_LOG_DIR=/mnt/vol-01/hadooplogs/
 # default log directory & file
 if [ "$YARN_LOG_DIR" = "" ]; then
   YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
@@ -118,7 +118,7 @@ export HADOOP_CLIENT_OPTS="-Xmx512m $HADOOP_CLIENT_OPTS"
 export HADOOP_SECURE_DN_USER=${HADOOP_SECURE_DN_USER}
 
 # Where log files are stored.  $HADOOP_HOME/logs by default.
-export HADOOP_LOG_DIR=/vol-01/hadooplogs/
+export HADOOP_LOG_DIR=/mnt/vol-01/hadooplogs/
 
 # Where log files are stored in the secure data environment.
 export HADOOP_SECURE_DN_LOG_DIR=${HADOOP_LOG_DIR}/${HADOOP_HDFS_USER}
