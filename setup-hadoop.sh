@@ -214,7 +214,7 @@ echo "
 
 " > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
-echo"
+echo "
  <configuration>
   <property>
     <name>yarn.nodemanager.aux-services</name>
@@ -246,7 +246,7 @@ echo"
 </property>
  </configuration>
 
-"> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
+" > $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
 
 echo "
 export JAVA_HOME=/usr
