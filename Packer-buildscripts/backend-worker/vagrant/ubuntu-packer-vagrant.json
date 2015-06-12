@@ -41,7 +41,7 @@
   "post-processors": [
   {
   "type": "vagrant",
-  "output": "./vagrant-build/ubuntu-backend-worker-packer-vagrant-build-{{timestamp}}.box",
+  "output": "./vagrant-build-backend-worker/ubuntu-backend-worker-packer-vagrant-build-{{timestamp}}.box",
   "compression_level": 9 
   }]
 
