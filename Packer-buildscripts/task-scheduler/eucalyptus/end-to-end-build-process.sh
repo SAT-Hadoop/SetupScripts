@@ -32,7 +32,7 @@ while getopts ":t:" opt; do
        echo " "
        ;;
     \?)
-       echo "Invalid option: -$OPTARG" >&2
+       echo "Invalid option: -$OPTARG. -t is the only valid option followed by STABLE or TEST" >&2
        exit 1
        ;;
     :)
