@@ -41,7 +41,7 @@ Open http://ipaddress/app/index in the browser to get started
 Launch as many ec2 instances as you need ec2 with ubuntu-xx.xx as the OS attaching the setup-hadoop.sh at the time of instance creation.
 </ol>
 <ol>
-Attach an EBS to mount the volume on to the directory /vol-01. The script disksetup.sh does the same. Attach disksetup.sh at the time of instance launch
+attach an EBS to mount the volume on to the directory /vol-01. The script disksetup.sh does the same. Attach disksetup.sh at the time of instance launch
 </ol>
 <ol>
 Login to the instance, clone the current repository
