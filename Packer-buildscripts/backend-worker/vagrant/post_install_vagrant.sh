@@ -1,5 +1,5 @@
 #!/bin/bash 
-set -e
+#set -e
 set -v
 
 echo password | sudo -S add-apt-repository -y ppa:adiscon/v8-stable
@@ -15,7 +15,7 @@ sudo apt-get install -y rsyslog
 #sudo apt-get install -y oracle-java7-installer
 
 # Install aws-cli
-sudo pip install awscli
+#sudo pip install awscli
 
 # Install Ganglia as a client to the central server
 sudo apt-get install -y ganglia-monitor 

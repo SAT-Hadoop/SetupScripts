@@ -1,11 +1,15 @@
 #!/bin/bash
 
-set -e
+#set -e
 set -x
 
-if [ -d ./vagrant-build ]; then
+if [ -d ./vagrant-build-backend-worker ]; then
  
-  rm -rfv ./vagrant-build
+  rm -rfv ./vagrant-build-backend-worker/*
+
+else
+
+  mkdir ./vagrant-build-backend-worker
 
 fi
 

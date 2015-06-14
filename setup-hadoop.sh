@@ -58,13 +58,13 @@ fi
 # so that filenames w/ spaces are handled correctly in loops below
 IFS=
 
-YARN_LOG_DIR=/vol-01/hadooplogs/
+YARN_LOG_DIR=/mnt/vol-01/hadooplogs/
 # default log directory & file
 if [ "$YARN_LOG_DIR" = "" ]; then
   YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
 fi
 if [ "$YARN_LOGFILE" = "" ]; then
-  YARN_LOGFILE='yarn.log'
+  YARN_LOGFILE=yarn.log
 fi
 
 # default policy file for service-level authorization
@@ -118,7 +118,7 @@ export HADOOP_CLIENT_OPTS="-Xmx512m $HADOOP_CLIENT_OPTS"
 export HADOOP_SECURE_DN_USER=${HADOOP_SECURE_DN_USER}
 
 # Where log files are stored.  $HADOOP_HOME/logs by default.
-export HADOOP_LOG_DIR=/vol-01/hadooplogs/
+export HADOOP_LOG_DIR=/mnt/vol-01/hadooplogs/
 
 # Where log files are stored in the secure data environment.
 export HADOOP_SECURE_DN_LOG_DIR=${HADOOP_LOG_DIR}/${HADOOP_HDFS_USER}
@@ -129,7 +129,7 @@ export HADOOP_SECURE_DN_PID_DIR=${HADOOP_PID_DIR}
 # A string representing this instance of hadoop. $USER by default.
 export HADOOP_IDENT_STRING=$USER
 
-' > $HOME/etc/hadoop/hadoop-env.sh
+' > $HOME/hadoop-2.6.0/etc/hadoop/hadoop-env.sh
 
 
 echo "
@@ -165,14 +165,12 @@ echo "
 </property>
 <property>       
  <name>dfs.data.dir</name>       
- <value>/vol-01/hadoop/hdfs/dn</value>  
+ <value>/vol-01/hadoop/hdfs/dn</value>
  <description>Comma separated list of paths. Use the list of directories from $DFS_NAME_DIR.  
                 For example, /grid/hadoop/hdfs/nn,/grid1/hadoop/hdfs/nn.</description>
 </property>
-
-
-
 </configuration>
+
 " > $HOME/hadoop-2.6.0/etc/hadoop/hdfs-site.xml
 
 echo "
@@ -209,14 +207,15 @@ echo "
 <name>mapreduce.map.java.opts</name>
 <value>-Xmx500m</value>
 </property>
-</property>
+<property>
 <name>mapreduce.reduce.java.opts</name>
 <value>-Xmx500m</value>
+</property>
 </configuration>
 
 " > $HOME/hadoop-2.6.0/etc/hadoop/mapred-site.xml
 
-echo"
+echo "
  <configuration>
   <property>
     <name>yarn.nodemanager.aux-services</name>
@@ -248,7 +247,7 @@ echo"
 </property>
  </configuration>
 
-"> $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
+" > $HOME/hadoop-2.6.0/etc/hadoop/yarn-site.xml
 
 echo "
 export JAVA_HOME=/usr
