@@ -272,6 +272,6 @@ source ~/.bashrc
 sudo chmod 777 /etc/hosts
 echo "`/sbin/ifconfig | grep 'inet addr:' | head -1 | awk '{print $2}'|awk -F":" '{print $2}'` master" >> /etc/hosts
 echo "master" > $HOME//hadoop-2.6.0/etc/hadoop/slaves
-$HOME/hadoop-2.6.0/sbin/stop-all.sh
-$HOME/hadoop-2.6.0/bin/hadoop master -format -force
+#$HOME/hadoop-2.6.0/sbin/stop-all.sh
+#$HOME/hadoop-2.6.0/bin/hadoop master -format -force
 #$HOME/hadoop-2.6.0/sbin/start-all.sh
