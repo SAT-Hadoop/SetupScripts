@@ -44,7 +44,7 @@ git clone https://github.com/SAT-Hadoop/BackendWorker.git ~/BackendWorker
 git clone https://github.com/SAT-Hadoop/sat-hadoop-api.git ~/sat-hadoop-api
 
 mvn clean install -f ~/sat-hadoop-api/pom.xml
-mvn clean install -f ~/BackendWorker/pom.xml
+mvn clean install -Dmaven.test.skip=true -f ~/BackendWorker/pom.xml
 # ending configuration and poweroff
 #echo password | sudo -S curl -o /etc/rc.local https://raw.githubusercontent.com/viglesiasce/cloud-images/master/utils/rc.local
 #echo password | sudo -S chmod +x /etc/rc.local
